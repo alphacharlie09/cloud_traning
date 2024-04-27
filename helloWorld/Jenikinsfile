@@ -28,7 +28,7 @@ pipeline {
                 script {
                     sshagent(credentials: ['simna1_ssh']) {
                         sh 'hostname -I'
-                        sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.42.180 "ls && docker pull alphacharlie/hello:latest && docker run -d -p 8765:80 a>
+                        sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.42.180 "ls && docker pull alphacharlie/hello:latest && docker run -d -p 8765:80 alphacharlie/hello:latest'
                         echo 'Task completed!'
                     }
                 }

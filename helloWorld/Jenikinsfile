@@ -1,3 +1,4 @@
+  GNU nano 6.2                                                             Jenikinsfile                                                                       
 pipeline {
     agent any
     environment {
@@ -7,10 +8,10 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-		    echo 'Test begin'
+                    echo 'Test begin'
                     // Build the Docker image
                     sh 'docker build -t alphacharlie/hello ./helloWorld/'
-		    echo 'This where the change happend'
+                    echo 'This where the change happend'
                 }
             }
         }
@@ -23,6 +24,17 @@ pipeline {
                     }
                 }
             }
+        stage('Connect_ssh') {
+            steps {
+                script {
+                    sshagent(credentials: ['simna1_ssh']) {
+                        sh 'hostname -I'
+                        sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.42.180 "ls && docker pull alphacharlie/hello:latest && docker run -d -p 8765:80 a>
+                        echo 'Task completed!'
+                    }
+                }
+            }
+        }
         }
     }
 }
